@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-purple-200">
+    <div id="app">
+        <h1 id="title" class="text-2xl font-semibold text-center text-blue-800">{{title}}</h1>
+        <h3 class="text-sm text-center text-blue-800">Total Inventory: {{total}}</h3>
+        <div class ="flex flex-col">
+            <input placeholder="New product" type="text" class="rounded p-2 w-5/6 mx-auto" v-model="newProduct"
+            @change="addProduct"/>
+            <ul>
+                <li v-for="product in products"
+                class="bg-white w-5/6 mx-auto p-2 mt-2 rounded shadow ">
+                <span v-if="product.qty==0"
+                class="text-xs font-bold text-red-500">Out of stock!</span>
+                <span v-else>{{product.qty}}</span>
+                 - {{product.name}}
+                <button v-show="product.qty>0"
+                    class="bg-red-500 px-2.5 pb-0.5 mx-1 rounded text-white hover:bg-red-700" @click="product.qty--">-</button>
+                <button class="bg-green-500 px-2 pb-0.5 mx-1 rounded text-white hover:bg-green-700" @click="product.qty++">+</button>
+                </li>
+            </ul>
+        </div>
+        
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="main.js"></script>
+</body>
+</html>
